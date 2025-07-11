@@ -12,7 +12,6 @@ import java.util.List;
 @Repository
 public interface CourseRepository extends ElasticsearchRepository<CourseDocument, String> {
 
-    // Custom query methods can be added here if needed
     Page<CourseDocument> findByCategory(String category, Pageable pageable);
 
     Page<CourseDocument> findByType(CourseDocument.CourseType type, Pageable pageable);

@@ -13,7 +13,7 @@ import java.time.LocalDateTime;
 @AllArgsConstructor
 public class SearchRequestDto {
 
-    private String q; // search keyword
+    private String q;
     private Integer minAge;
     private Integer maxAge;
     private String category;
@@ -21,7 +21,7 @@ public class SearchRequestDto {
     private Double minPrice;
     private Double maxPrice;
     private LocalDateTime startDate;
-    private String sort; // upcoming, priceAsc, priceDesc
+    private String sort;
 
     @Builder.Default
     private Integer page = 0;
