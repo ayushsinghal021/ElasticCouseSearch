@@ -1,8 +1,8 @@
-package com.undoschool.elastic.service;
+package com.undoschool.cousesearch.service;
 
-import com.undoschool.elastic.document.CourseDocument;
-import com.undoschool.elastic.dto.SearchRequestDto;
-import com.undoschool.elastic.dto.SearchResponseDto;
+import com.undoschool.cousesearch.document.CourseDocument;
+import com.undoschool.cousesearch.dto.SearchRequestDto;
+import com.undoschool.cousesearch.dto.SearchResponseDto;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.data.domain.PageRequest;
@@ -21,6 +21,8 @@ import co.elastic.clients.elasticsearch._types.query_dsl.RangeQuery;
 import co.elastic.clients.elasticsearch._types.query_dsl.TermQuery;
 import co.elastic.clients.elasticsearch._types.query_dsl.MultiMatchQuery;
 import co.elastic.clients.json.JsonData;
+
+import java.io.IOException;
 
 import java.time.format.DateTimeFormatter;
 import java.util.List;
@@ -77,7 +79,7 @@ public class CourseSearchService {
             MultiMatchQuery multiMatchQuery = MultiMatchQuery.of(m -> m
                     .fields("title^2", "description") // Boost title relevance
                     .query(request.getQ())
-                    .fuzziness("AUTO") // Enable fuzzy matching
+                    .fuzziness("2") // Enable fuzzy matching with a higher value
                     .prefixLength(1)
                     .maxExpansions(10)
             );
@@ -175,16 +177,15 @@ public class CourseSearchService {
             return List.of();
         }
 
-        // Use a prefix query instead of completion suggester for better compatibility
-        Query prefixQuery = Query.of(q -> q
-                .prefix(p -> p
+        Query matchPhrasePrefixQuery = Query.of(q -> q
+                .matchPhrasePrefix(mp -> mp
                         .field("title")
-                        .value(partialTitle)
+                        .query(partialTitle)
                 )
         );
 
         NativeQuery query = new NativeQueryBuilder()
-                .withQuery(prefixQuery)
+                .withQuery(matchPhrasePrefixQuery)
                 .withMaxResults(10)
                 .build();
 

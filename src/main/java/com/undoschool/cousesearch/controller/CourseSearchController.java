@@ -1,9 +1,9 @@
-package com.undoschool.elastic.controller;
+package com.undoschool.cousesearch.controller;
 
-import com.undoschool.elastic.document.CourseDocument;
-import com.undoschool.elastic.dto.SearchRequestDto;
-import com.undoschool.elastic.dto.SearchResponseDto;
-import com.undoschool.elastic.service.CourseSearchService;
+import com.undoschool.cousesearch.document.CourseDocument;
+import com.undoschool.cousesearch.dto.SearchRequestDto;
+import com.undoschool.cousesearch.dto.SearchResponseDto;
+import com.undoschool.cousesearch.service.CourseSearchService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.format.annotation.DateTimeFormat;

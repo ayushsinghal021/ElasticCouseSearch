@@ -1,4 +1,4 @@
-package com.undoschool.elastic.config;
+package com.undoschool.cousesearch.config;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.data.elasticsearch.client.ClientConfiguration;
@@ -6,7 +6,7 @@ import org.springframework.data.elasticsearch.client.elc.ElasticsearchConfigurat
 import org.springframework.data.elasticsearch.repository.config.EnableElasticsearchRepositories;
 
 @Configuration
-@EnableElasticsearchRepositories(basePackages = "com.undoschool.elastic.repository")
+@EnableElasticsearchRepositories(basePackages = "com.undoschool.cousesearch.repository")
 public class ElasticsearchConfig extends ElasticsearchConfiguration {
 
     @Value("${spring.elasticsearch.uris:http://localhost:9200}")

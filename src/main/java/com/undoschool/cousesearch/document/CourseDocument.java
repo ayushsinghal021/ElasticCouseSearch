@@ -1,4 +1,4 @@
-package com.undoschool.elastic.document;
+package com.undoschool.cousesearch.document;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.AllArgsConstructor;
@@ -6,9 +6,13 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.springframework.data.annotation.Id;
+import org.springframework.data.elasticsearch.annotations.CompletionField;
 import org.springframework.data.elasticsearch.annotations.Document;
 import org.springframework.data.elasticsearch.annotations.Field;
 import org.springframework.data.elasticsearch.annotations.FieldType;
+import org.springframework.data.elasticsearch.core.suggest.Completion;
+
+import java.time.Instant;
 import java.time.LocalDateTime;
 
 @Data
@@ -19,7 +23,7 @@ import java.time.LocalDateTime;
 public class CourseDocument {
 
     public enum CourseType {
-        ONE_TIME, COURSE, CLUB
+        ONE_TIME, COURSE, CLUB, WORKSHOP
     }
 
     @Id
@@ -49,11 +53,10 @@ public class CourseDocument {
     @Field(type = FieldType.Double)
     private Double price;
 
-    @Field(type = FieldType.Date, format = {}, pattern = "uuuu-MM-dd'T'HH:mm:ss")
-    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd'T'HH:mm:ss")
-    private LocalDateTime nextSessionDate;
+    @Field(type = FieldType.Date, format = {}, pattern = "yyyy-MM-dd'T'HH:mm:ss'Z'")
+    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd'T'HH:mm:ss'Z'", timezone = "UTC")
+    private Instant nextSessionDate;
 
-//    // For autocomplete functionality (Assignment B)
-//    @CompletionField(maxInputLength = 100)
-//    private Completion suggest;
+    @CompletionField(maxInputLength = 100)
+    private Completion suggest;
 }

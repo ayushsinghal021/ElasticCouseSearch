@@ -1,5 +1,5 @@
-package com.undoschool.elastic.dto;
-import com.undoschool.elastic.document.CourseDocument;
+package com.undoschool.cousesearch.dto;
+import com.undoschool.cousesearch.document.CourseDocument;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;

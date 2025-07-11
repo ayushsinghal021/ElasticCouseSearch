@@ -1,6 +1,6 @@
-package com.undoschool.elastic.repository;
+package com.undoschool.cousesearch.repository;
 
-import com.undoschool.elastic.document.CourseDocument;
+import com.undoschool.cousesearch.document.CourseDocument;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.elasticsearch.repository.ElasticsearchRepository;
